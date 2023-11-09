@@ -1,0 +1,25 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $message = $_POST["message"];
+    
+    $to = "recipient@example.com";  // Replace with the recipient's email address
+    $subject = "Quote Request from $name";
+    $headers = "From: $email";
+
+    $mailBody = "Name: $name\n";
+    $mailBody .= "Email: $email\n";
+    $mailBody .= "Phone: $phone\n";
+    $mailBody .= "Message:\n$message";
+
+    if (mail($to, $subject, $mailBody, $headers)) {
+        // Email sent successfully
+        echo "Thank you for your message. We will contact you shortly.";
+    } else {
+        // Email sending failed
+        echo "Sorry, there was an issue sending your message. Please try again later.";
+    }
+}
+?>
